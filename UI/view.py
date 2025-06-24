@@ -6,7 +6,7 @@ class View(ft.UserControl):
         super().__init__()
         # page stuff
         self._page = page
-        self._page.title = "Template application using MVC and DAO"
+        self._page.title = "Esame del 26/06/2025 - Turno A"
         self._page.horizontal_alignment = 'CENTER'
         self._page.theme_mode = ft.ThemeMode.DARK
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
@@ -20,26 +20,34 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("Hello World", color="blue", size=24)
+        self._title = ft.Text("Esame del 26/06/2025 - Turno A", color="blue", size=24)
         self._page.controls.append(self._title)
 
-        #ROW with some controls
-        # text field for the name
-        self.txt_name = ft.TextField(
-            label="name",
-            width=200,
-            hint_text="Insert a your name"
-        )
-
-        # button for the "hello" reply
-        self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
-        row1 = ft.Row([self.txt_name, self.btn_hello],
+        #ROW 1
+        self._ddYear1 = ft.Dropdown(label="Year start", width=150)
+        self._ddYear2 = ft.Dropdown(label="Year end", width=150)
+        self._btnBuildGraph = ft.ElevatedButton(text="Crea grafo", on_click=self._controller.handleBuildGraph)
+        self._btnPrintDetails = ft.ElevatedButton(text="Stampa dettagli", on_click=self._controller.handlePrintDetails)
+        row1 = ft.Row([self._ddYear1, self._ddYear2, self._btnBuildGraph, self._btnPrintDetails],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
 
+        #ROW2
+        self._txtGraphDetails = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
+        self._page.controls.append(self._txtGraphDetails)
+
+        #ROW3
+        self._txtInSoglia = ft.TextField(label="Soglia", width=300)
+        self._btnBuildGraph = ft.ElevatedButton(text="Cerca Dream Championship", on_click=self._controller.handleCercaDreamChampionship)
+
+        row3 = ft.Row([self._txtInSoglia, self._btnBuildGraph],
+                      alignment=ft.MainAxisAlignment.CENTER)
+
+        self._page.controls.append(row3)
+
         # List View where the reply is printed
-        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
-        self._page.controls.append(self.txt_result)
+        self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
+        self._page.controls.append(self._txt_result)
         self._page.update()
 
     @property
