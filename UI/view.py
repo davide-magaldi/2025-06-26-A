@@ -8,7 +8,7 @@ class View(ft.UserControl):
         self._page = page
         self._page.title = "Esame del 26/06/2025 - Turno A"
         self._page.horizontal_alignment = 'CENTER'
-        self._page.theme_mode = ft.ThemeMode.DARK
+        self._page.theme_mode = ft.ThemeMode.LIGHT
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
         self._controller = None
         # graphical elements
@@ -20,7 +20,7 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("Esame del 26/06/2025 - Turno A", color="blue", size=24)
+        self._title = ft.Text("Esame del 26/06/2025 - Turno A", color="green", size=24)
         self._page.controls.append(self._title)
 
         #ROW 1
@@ -37,10 +37,11 @@ class View(ft.UserControl):
         self._page.controls.append(self._txtGraphDetails)
 
         #ROW3
-        self._txtInSoglia = ft.TextField(label="Soglia", width=300)
-        self._btnBuildGraph = ft.ElevatedButton(text="Cerca Dream Championship", on_click=self._controller.handleCercaDreamChampionship)
+        self._txtInSoglia = ft.TextField(label="Soglia", width=200)
+        self._txtInNumDiEdizioni = ft.TextField(label="Num di Edizioni", width=200)
+        self._btnCalcolaSoluzione = ft.ElevatedButton(text="Cerca Dream Championship", on_click=self._controller.handleCercaDreamChampionship)
 
-        row3 = ft.Row([self._txtInSoglia, self._btnBuildGraph],
+        row3 = ft.Row([self._txtInSoglia, self._txtInNumDiEdizioni, self._btnCalcolaSoluzione],
                       alignment=ft.MainAxisAlignment.CENTER)
 
         self._page.controls.append(row3)
